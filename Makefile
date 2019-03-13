@@ -6,3 +6,6 @@ delegates.tex : main.csv generate.py
 
 main.csv : raw.csv
 	./repair.sh raw.csv main.csv
+
+clean :
+	rm -f main.csv template.pdf raw.csv
