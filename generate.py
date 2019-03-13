@@ -1,4 +1,7 @@
 #!/usr/bin/python
+# TODO:
+# - get file names from command line
+# - output current/alternate delegates info
 
 import csv
 
@@ -8,7 +11,6 @@ def table_end(fh):
 def print_header(fh, area_number, area_name):
     fh.write("\\newpage\n")
     fh.write("\\footnotesize\n")
-    #fh.write("\\begin{longtable}{@{\\extracolsep{\\fill}}|l|l|l|}\n")
     fh.write("\\begin{longtable}{|l|l|l|}\n")
     fh.write("\\caption{\\underline{" + "Area {0} --- {1}".format(area_number, area_name) + "}}\\\\\n")
     fh.write("\\hline\n")
@@ -81,3 +83,6 @@ with open('delegates.tex', 'w') as del_file:
         print_deceased(del_file, area, dead)
 
         print_visitors(del_file, honorary)
+
+#print current
+#print alternate

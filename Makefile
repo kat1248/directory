@@ -2,7 +2,7 @@ directory.pdf : delegates.tex directory.tex
 	pdflatex directory.tex
 
 delegates.tex : main.csv generate.py
-	python generate.py  > delegates.tex
+	python generate.py delegates.tex current.tex
 
 main.csv : raw.csv
 	./repair.sh raw.csv main.csv
