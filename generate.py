@@ -10,7 +10,7 @@ def print_header(area_number, area_name):
     print ("\\footnotesize")
     #print ("\\begin{longtable}{@{\\extracolsep{\\fill}}|l|l|l|}")
     print ("\\begin{longtable}{|l|l|l|}")
-    print ("\\caption{\underline{" + "Area {0} --- {1}".format(area_number, area_name) + "}}\\\\")
+    print ("\\caption{\\underline{" + "Area {0} --- {1}".format(area_number, area_name) + "}}\\\\")
     print ("\\hline")
 
 def print_deceased(area_number, delegates):
@@ -28,7 +28,7 @@ def print_delegate(d):
         return
     print ("{0} {1} & Area {2}, Panel {3} & Tel: {4} \\\\*".format(d['First'], d['Last'], d['Area'], d['Panel'], d['Tel #']))
     print ("{0} & Year Served: {1} & Alt. Tel: {2} \\\\*".format(d['Street 1'], d['Year Served'], d['Alt Tel #']))
-    if row['City'] == '':
+    if d['City'] == '':
         print (" & & Email: {0} \\\\*".format(d['Email']))
     else:
         print ("{0}, {1}, {2} & & Email: {3} \\\\*".format(d['City'], d['State'], d['Zip'], d['Email']))
@@ -38,7 +38,7 @@ def print_visitors(visitors):
     print ("\\newpage")
     print ("\\footnotesize")
     print ("\\begin{longtable}{|l|l|l|}")
-    print ("\\caption{\underline{Delegates from other Areas}}\\\\")
+    print ("\\caption{\\underline{Delegates from other Areas}}\\\\")
     print ("\\hline")
     for v in visitors:
         print_delegate(v)
