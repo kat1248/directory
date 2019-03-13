@@ -1,5 +1,5 @@
-template.pdf : delegates.tex template.tex
-	pdflatex template.tex
+directory.pdf : delegates.tex directory.tex
+	pdflatex directory.tex
 
 delegates.tex : main.csv generate.py
 	python generate.py  > delegates.tex
@@ -7,5 +7,13 @@ delegates.tex : main.csv generate.py
 main.csv : raw.csv
 	./repair.sh raw.csv main.csv
 
+fetch : 
+	rm -f raw.csv
+	./fetch_data.sh
+
+.PHONY: rerun
+rerun:
+	pdflatex directory.tex
+
 clean :
-	rm -f main.csv template.pdf raw.csv
+	rm -f main.csv directory.pdf raw.csv delegates.aux delegates.tex directory.aux directory.log
