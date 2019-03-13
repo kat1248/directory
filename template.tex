@@ -1,0 +1,31 @@
+\documentclass[letterpaper,12pt]{report}
+
+\usepackage{longtable}
+\usepackage[margin=0.75in]{geometry} 
+\usepackage[singlelinecheck=false,font=large,textfont=bf,format=plain,labelformat=empty,justification=raggedright]{caption}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+\setlist{nosep}
+\setlist{noitemsep}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{Northeast Region Delegates Directory --- 2019}
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{\footnotesize \today}
+\renewcommand{\headrulewidth}{2pt}
+
+\title{\bf{Northeast Region Delegates Directory - 2019}}
+
+\date{Last Update: \today}
+
+\begin{document}
+
+\maketitle
+
+\include{delegates}
+
+\end{document}
