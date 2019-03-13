@@ -7,7 +7,7 @@ delegates.tex : main.csv generate.py
 main.csv : raw.csv
 	./repair.sh raw.csv main.csv
 
-fetch : 
+raw.csv : 
 	rm -f raw.csv
 	./fetch_data.sh
 
