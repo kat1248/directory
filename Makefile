@@ -15,5 +15,7 @@ raw.csv :
 rerun:
 	pdflatex directory.tex
 
+all : directory.pdf
+
 clean :
 	rm -f main.csv directory.pdf raw.csv delegates.aux delegates.tex directory.aux directory.log
