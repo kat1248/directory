@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import csv
 
 def table_end():
@@ -69,6 +71,3 @@ with open('main.csv') as csvfile:
     print_deceased(area, dead)
 
     print_visitors(honorary)
-
-# convert &, _, #
-
