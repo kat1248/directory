@@ -1,6 +1,9 @@
 *.log
 *.aux
 *.pdf
+*.fls
+*.fdb_latexmk
+*.gz
 delegates.tex
 raw.csv
 main.csv

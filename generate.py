@@ -4,16 +4,26 @@
 # - output current/alternate delegates info
 
 import csv
+use_longtabu = True
 
-def table_end(fh):
-    fh.write("\\end{longtable}\n")
-
-def print_header(fh, area_number, area_name):
+def table_start(fh, caption):
     fh.write("\\newpage\n")
     fh.write("\\footnotesize\n")
-    fh.write("\\begin{longtable}{|l|l|l|}\n")
-    fh.write("\\caption{\\underline{" + "Area {0} --- {1}".format(area_number, area_name) + "}}\\\\\n")
+    if use_longtabu:
+        fh.write("\\begin{longtabu} to \\textwidth {|X[3,l]|X[3,l]|X[4,l]|}\n")
+    else:
+        fh.write("\\begin{longtable}{|l|l|l|}\n")
+    fh.write("\\caption{\\underline{" + caption + "}}\\\\\n")
     fh.write("\\hline\n")
+
+def table_end(fh):
+    if use_longtabu:
+        fh.write("\\end{longtabu}\n")
+    else:
+        fh.write("\\end{longtable}\n")
+
+def print_header(fh, area_number, area_name):
+    table_start(fh, "Area {0} --- {1}".format(area_number, area_name))
 
 def print_deceased(fh, area_number, delegates):
     fh.write("\\large\n")
@@ -37,11 +47,7 @@ def print_delegate(fh, d):
     fh.write("\hline\n")
 
 def print_visitors(fh, visitors):
-    fh.write("\\newpage\n")
-    fh.write("\\footnotesize\n")
-    fh.write("\\begin{longtable}{|l|l|l|}\n")
-    fh.write("\\caption{\\underline{Delegates from other Areas}}\\\\\n")
-    fh.write("\\hline\n")
+    table_start(fh, 'Delegates from other Areas')
     for v in visitors:
         print_delegate(fh, v)
     table_end(fh)
