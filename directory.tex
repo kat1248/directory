@@ -5,6 +5,10 @@
 \usepackage[singlelinecheck=false,font=large,textfont=bf,format=plain,labelformat=empty,justification=raggedright]{caption}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
+\usepackage[firstpage]{draftwatermark}
+
+\SetWatermarkText{Confidential}
+\SetWatermarkScale{5}
 
 \setlist{nosep}
 \setlist{noitemsep}
@@ -25,7 +29,9 @@
 
 \begin{document}
 
+\begin{titlepage}
 \maketitle
+\end{titlepage}
 
 \include{delegates}
 
