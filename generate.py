@@ -3,7 +3,8 @@
 # - get file names from command line
 # - output current/alternate delegates info
 
-import csv
+import csv, sys, getopt
+
 use_longtabu = True
 
 def table_start(fh, caption):
@@ -52,43 +53,44 @@ def print_visitors(fh, visitors):
         print_delegate(fh, v)
     table_end(fh)
 
-valid_areas = ['11', '12', '13', '28', '29', '30', '31', '43', '44', '45', '47', '48', '49', '50', '59', '60', '61', '70']
-current_panels = ['68', '69']
-current_alts = ['Alt-68', 'Alt-69']
+def main(argv):
+    valid_areas = ['11', '12', '13', '28', '29', '30', '31', '43', '44', '45', '47', '48', '49', '50', '59', '60', '61', '70']
+    current_panels = ['68', '69']
+    current_alts = ['Alt-68', 'Alt-69']
 
-area = 0
-dead = []
-honorary = []
-current = []
-alternate = []
+    area = 0
+    dead = []
+    honorary = []
+    current = []
+    alternate = []
 
-with open('delegates.tex', 'w') as del_file:
-    with open('main.csv') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            if row['Area'] in valid_areas:
-                if row['Area'] != area:
-                    if area != 0:
-                        table_end(del_file)
-                        print_deceased(del_file, area, dead)
-                        dead = []
-                    area = row['Area']
-                    print_header(del_file, area, row['Area Name'])
-                if row['Deceased'] == '':
-                    print_delegate(del_file, row)
-                    if row['Panel'] in current_panels:
-                        current.append(row)
-                    elif row['Panel'] in current_alts:
-                        alternate.append(row)
+    with open('delegates.tex', 'w') as del_file:
+        with open('main.csv') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['Area'] in valid_areas:
+                    if row['Area'] != area:
+                        if area != 0:
+                            table_end(del_file)
+                            print_deceased(del_file, area, dead)
+                            dead = []
+                        area = row['Area']
+                        print_header(del_file, area, row['Area Name'])
+                    if row['Deceased'] == '':
+                        print_delegate(del_file, row)
+                        if row['Panel'] in current_panels:
+                            current.append(row)
+                        elif row['Panel'] in current_alts:
+                            alternate.append(row)
+                    else:
+                        dead.append(row)
                 else:
-                    dead.append(row)
-            else:
-                honorary.append(row)
+                    honorary.append(row)
         
         table_end(del_file)
         print_deceased(del_file, area, dead)
 
         print_visitors(del_file, honorary)
 
-#print current
-#print alternate
+if __name__ == "__main__":
+    main(sys.argv)
