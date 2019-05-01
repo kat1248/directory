@@ -5,10 +5,6 @@
 \usepackage[singlelinecheck=false,font=large,textfont=bf,format=plain,labelformat=empty,justification=raggedright]{caption}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
-\usepackage[firstpage]{draftwatermark}
-
-\SetWatermarkText{Confidential}
-\SetWatermarkScale{5}
 
 \setlist{nosep}
 \setlist{noitemsep}
@@ -17,11 +13,10 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[C]{Northeast Region Delegates Directory --- 2019}
-\fancyfoot[R]{\thepage}
-\fancyfoot[C]{\textit{Confidential}}
-\fancyfoot[L]{\footnotesize \today}
-\renewcommand{\headrulewidth}{2pt}
+\fancyhead[C]{\textbf{Northeast Region --- Current Alternate Delegates --- Panels 68 \& 69}}
+\setlength\headsep{3pt}
+\setlength\headheight{18pt}
+\renewcommand{\headrulewidth}{0pt}
 
 \title{\bf{Northeast Region Delegates Directory - 2019}}
 \author{}
@@ -29,10 +24,6 @@
 
 \begin{document}
 
-\begin{titlepage}
-\maketitle
-\end{titlepage}
-
-\include{directory.inc}
+\include{alternate.inc}
 
 \end{document}

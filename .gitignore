@@ -4,6 +4,6 @@
 *.fls
 *.fdb_latexmk
 *.gz
-delegates.tex
+*.inc.tex
 raw.csv
 main.csv

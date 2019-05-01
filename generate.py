@@ -4,17 +4,25 @@
 # - output current/alternate delegates info
 
 import csv, sys, getopt
+from datetime import date
+from datetime import time
+from datetime import datetime
 
 use_longtabu = True
 
-def table_start(fh, caption):
+def table_start(fh):
     fh.write("\\newpage\n")
     fh.write("\\footnotesize\n")
     if use_longtabu:
         fh.write("\\begin{longtabu} to \\textwidth {|X[3,l]|X[3,l]|X[4,l]|}\n")
     else:
         fh.write("\\begin{longtable}{|l|l|l|}\n")
+
+def table_caption(fh, caption):
     fh.write("\\caption{\\underline{" + caption + "}}\\\\\n")
+    fh.write("\\hline\n")
+
+def table_del_caption(fh):
     fh.write("\\hline\n")
 
 def table_end(fh):
@@ -24,7 +32,8 @@ def table_end(fh):
         fh.write("\\end{longtable}\n")
 
 def print_header(fh, area_number, area_name):
-    table_start(fh, "Area {0} --- {1}".format(area_number, area_name))
+    table_start(fh)
+    table_caption(fh, "Area {0} --- {1}".format(area_number, area_name))
 
 def print_deceased(fh, area_number, delegates):
     fh.write("\\large\n")
@@ -48,15 +57,34 @@ def print_delegate(fh, d):
     fh.write("\hline\n")
 
 def print_visitors(fh, visitors):
-    table_start(fh, 'Delegates from other Areas')
+    table_start(fh)
+    table_caption(fh, 'Delegates from other Areas')
     for v in visitors:
         print_delegate(fh, v)
     table_end(fh)
 
-def main(argv):
+def print_current_delegates(fh, delegates):
+    table_start(fh)
+    table_del_caption(fh)
+    for v in delegates:
+        print_current(fh, v)
+    table_end(fh)
+
+def print_current(fh, d):
+    area = "{0} - {1}".format(d['Area Name'], d['Area'])
+    fh.write("\\textbf{\\underline{" +  area + "}} & " + "Panel {0} & Tel: {1} \\\\*".format(d['Panel'], d['Tel #']))
+    fh.write("{0} {1} & Year Served {2} & Alt. Tel: {3} \\\\*".format(d['First'], d['Last'], d['Year Served'], d['Alt Tel #']))
+    fh.write("{0} & & Email: {1} \\\\*".format(d['Street 1'], d['Email']))
+    if d['City'] == '':
+        fh.write(" & & \\\\*")
+    else:
+        fh.write("{0}, {1}, {2} & & \\\\*".format(d['City'], d['State'], d['Zip']))
+    fh.write("\hline\n")
+
+def main(argv, panel):
     valid_areas = ['11', '12', '13', '28', '29', '30', '31', '43', '44', '45', '47', '48', '49', '50', '59', '60', '61', '70']
-    current_panels = ['68', '69']
-    current_alts = ['Alt-68', 'Alt-69']
+    current_panels = [str(panel), str(panel + 1)]
+    current_alts = ['Alt-' + str(panel), 'Alt-' + str(panel + 1)]
 
     area = 0
     dead = []
@@ -64,7 +92,7 @@ def main(argv):
     current = []
     alternate = []
 
-    with open('delegates.tex', 'w') as del_file:
+    with open('directory.inc.tex', 'w') as del_file:
         with open('main.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
@@ -92,5 +120,13 @@ def main(argv):
 
         print_visitors(del_file, honorary)
 
+    with open('current.inc.tex', 'w') as cur_file:
+        print_current_delegates(cur_file, current)
+
+    with open('alternate.inc.tex', 'w') as alt_file:
+        print_current_delegates(alt_file, alternate)
+
 if __name__ == "__main__":
-    main(sys.argv)
+    today = date.today()
+    panel = today.year - 1950
+    main(sys.argv, panel - 1)
