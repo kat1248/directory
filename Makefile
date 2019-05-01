@@ -29,4 +29,4 @@ all : $(OUTPUTS) $(INCLUDES)
 	@echo done
 
 clean :
-	$(RM) -f  *.pdf *.csv *.inc.tex *.aux *.log *.fls *.fdb_latexmk *.gz 
+	$(RM) -f  *.pdf *.csv *.inc.tex *.aux *.log *.fls *.fdb_latexmk *.gz .aux
