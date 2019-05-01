@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # TODO:
 # - get file names from command line
-# - output current/alternate delegates info
 
 import csv, sys, getopt
 from datetime import date
