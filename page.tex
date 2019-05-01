@@ -6,6 +6,9 @@
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 
+\newcommand*{\panelA}[1]{\the\numexpr#1-1951\relax}
+\newcommand*{\panelB}[1]{\the\numexpr#1-1950\relax}
+
 \setlist{nosep}
 \setlist{noitemsep}
 \setlength\LTleft{0pt}
@@ -13,17 +16,17 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[C]{\textbf{Northeast Region --- Current Delegates --- Panels 68 \& 69}}
+\fancyhead[C]{\textbf{Northeast Region --- Current \includedTitle --- Panels \panelA{\the\year} \& \panelB{\the\year}}}
 \setlength\headsep{3pt}
 \setlength\headheight{18pt}
 \renewcommand{\headrulewidth}{0pt}
 
-\title{\bf{Northeast Region Delegates Directory - 2019}}
+\title{\bf{Northeast Region Current \includedTitle - \the\year}}
 \author{}
 \date{Last Update: \today}
 
 \begin{document}
 
-\include{current.inc}
+\include{\includedFile}
 
 \end{document}
