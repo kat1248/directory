@@ -1,17 +1,18 @@
 .DEFAULT_GOAL := all
+
 LATEX := pdflatex
 PYTHON := python
 
 OUTPUTS = directory.pdf current.pdf alternate.pdf
 INCLUDES = $(patsubst %.pdf, %.inc.tex, $(OUTPUTS))
 
-current.pdf: page.tex current.inc.tex
+current.pdf : page.tex current.inc.tex
 	$(LATEX) -jobname current "\newcommand{\includedFile}{current.inc}\newcommand{\includedTitle}{Delegates}\input{$<}"
 
-alternate.pdf: page.tex alternate.inc.tex
+alternate.pdf : page.tex alternate.inc.tex
 	$(LATEX) -jobname alternate "\newcommand{\includedFile}{alternate.inc}\newcommand{\includedTitle}{Alternate Delegates}\input{$<}"
 
-directory.pdf: directory.tex directory.inc.tex
+directory.pdf : directory.tex directory.inc.tex
 	$(LATEX) $<
 
 $(INCLUDES) : main.csv generate.py 
@@ -20,11 +21,11 @@ $(INCLUDES) : main.csv generate.py
 main.csv : 
 	./fetch_data.sh $@
 
-.PHONY: rerun
-rerun:
+.PHONY : rerun
+rerun :
 	$(LATEX) directory.tex
 
-.PHONY: all
+.PHONY : all
 all : $(OUTPUTS) $(INCLUDES)
 	@echo done
 
