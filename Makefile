@@ -5,8 +5,11 @@ PYTHON := python
 OUTPUTS = directory.pdf current.pdf alternate.pdf
 INCLUDES = $(patsubst %.pdf, %.inc.tex, $(OUTPUTS))
 
-%.pdf : page.tex %.inc.tex
-	$(LATEX) -jobname $* "\newcommand{\includedFile}{current.inc}\newcommand{\includedTitle}{Delegates}\input{$<}"
+current.pdf: page.tex current.inc.tex
+	$(LATEX) -jobname current "\newcommand{\includedFile}{current.inc}\newcommand{\includedTitle}{Delegates}\input{$<}"
+
+alternate.pdf: page.tex alternate.inc.tex
+	$(LATEX) -jobname alternate "\newcommand{\includedFile}{alternate.inc}\newcommand{\includedTitle}{Alternate Delegates}\input{$<}"
 
 directory.pdf: directory.tex directory.inc.tex
 	$(LATEX) $<
