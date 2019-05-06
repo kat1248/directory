@@ -18,8 +18,11 @@ directory.pdf : directory.tex directory.inc.tex
 $(INCLUDES) : main.csv generate.py 
 	$(PYTHON) generate.py
 
-main.csv : 
-	./fetch_data.sh $@
+main.csv email.csv : 
+	./fetch_data.sh main.csv email.csv
+
+email_list.txt : email.csv
+	$(PYTHON) split-emails.py
 
 .PHONY : rerun
 rerun :
@@ -30,4 +33,4 @@ all : $(OUTPUTS) $(INCLUDES)
 	@echo done
 
 clean :
-	$(RM) -f  *.pdf *.csv *.inc.tex *.aux *.log *.fls *.fdb_latexmk *.gz .aux
+	$(RM) -f  *.pdf *.csv *.inc.tex *.aux *.log *.fls *.fdb_latexmk *.gz .aux *.txt
