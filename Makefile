@@ -22,14 +22,14 @@ main.csv email.csv :
 	./fetch_data.sh main.csv email.csv
 
 email_list.txt : email.csv
-	$(PYTHON) split-emails.py
+	$(PYTHON) split-emails.py -i $< -o $@
 
 .PHONY : rerun
 rerun :
 	$(LATEX) directory.tex
 
 .PHONY : all
-all : $(OUTPUTS) $(INCLUDES)
+all : $(OUTPUTS) $(INCLUDES) email_list.txt
 	@echo done
 
 clean :
