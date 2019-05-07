@@ -2,6 +2,7 @@
 
 LATEX := pdflatex
 PYTHON := python
+FETCH := ./fetch_data.sh
 
 OUTPUTS = directory.pdf current.pdf alternate.pdf
 INCLUDES = $(patsubst %.pdf, %.inc.tex, $(OUTPUTS))
@@ -18,10 +19,10 @@ directory.pdf : directory.tex directory.inc.tex
 $(INCLUDES) : main.csv generate.py 
 	$(PYTHON) generate.py
 
-main.csv email.csv : 
-	./fetch_data.sh main.csv email.csv
+main.csv emails.csv : 
+	$(FETCH) main.csv emails.csv
 
-email_list.txt : email.csv
+emails.txt : emails.csv
 	$(PYTHON) split-emails.py -i $< -o $@
 
 .PHONY : rerun
@@ -29,8 +30,8 @@ rerun :
 	$(LATEX) directory.tex
 
 .PHONY : all
-all : $(OUTPUTS) $(INCLUDES) email_list.txt
+all : $(OUTPUTS) $(INCLUDES) emails.txt
 	@echo done
 
 clean :
-	$(RM) -f  *.pdf *.csv *.inc.tex *.aux *.log *.fls *.fdb_latexmk *.gz .aux *.txt
+	$(RM) -f  *.pdf *.csv *.inc.tex *.aux *.log *.fls *.fdb_latexmk *.gz *.txt

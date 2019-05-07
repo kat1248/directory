@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # TODO:
 # - get file names from command line
+# - sort spreadsheet before pulling data
 
 import csv, sys, getopt
 from datetime import date
@@ -128,4 +129,4 @@ def main(argv, panel):
 if __name__ == "__main__":
     today = date.today()
     panel = today.year - 1950
-    main(sys.argv, panel - 1)
+    main(sys.argv[1:], panel - 1)
