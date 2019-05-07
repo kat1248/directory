@@ -14,11 +14,11 @@ def parse_args(argv):
     try:
         opts, args = getopt.getopt(argv[1:],"hi:o:",["ifile=","ofile="])
     except getopt.GetoptError:
-        print "{0} -i <inputfile> -o <outputfile>".format(script_name)
+        print("{0} -i <inputfile> -o <outputfile>".format(script_name))
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print "{0} -i <inputfile> -o <outputfile>".format(script_name)
+            print("{0} -i <inputfile> -o <outputfile>".format(script_name))
             sys.exit()
         elif opt in ("-i", "--ifile"):
             input_file = arg
