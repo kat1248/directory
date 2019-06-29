@@ -3,9 +3,12 @@
 LATEX := pdflatex
 PYTHON := python
 FETCH := ./fetch_data.sh
+CP := cp
 
 OUTPUTS = directory.pdf current.pdf alternate.pdf
 INCLUDES = $(patsubst %.pdf, %.inc.tex, $(OUTPUTS))
+DATE_STAMP = $(shell date +%Y-%m-%d)
+COPY_FILES = $(patsubst %.pdf, %-$(DATE_STAMP).pdf, $(OUTPUTS))
 
 current.pdf : page.tex current.inc.tex
 	$(LATEX) -jobname current "\newcommand{\includedFile}{current.inc}\newcommand{\includedTitle}{Delegates}\input{$<}"
@@ -31,7 +34,14 @@ rerun :
 
 .PHONY : all
 all : $(OUTPUTS) $(INCLUDES) emails.txt
-	@echo done
+	@echo built
 
 clean :
 	$(RM) -f  *.pdf *.csv *.inc.tex *.aux *.log *.fls *.fdb_latexmk *.gz *.txt
+
+.PHONY : distribute
+distribute : $(COPY_FILES)
+	@echo timestamped
+
+%-$(DATE_STAMP).pdf: %.pdf
+	@$(CP) $< $@
