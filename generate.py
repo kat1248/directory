@@ -76,9 +76,9 @@ def print_current(fh, d):
     fh.write("{0} {1} & Year Served {2} & Alt. Tel: {3} \\\\*".format(d['First'], d['Last'], d['Year Served'], d['Alt Tel #']))
     fh.write("{0} & & Email: {1} \\\\*".format(d['Street 1'], d['Email']))
     if d['City'] == '':
-        fh.write(" & & \\\\*")
+        fh.write(" & {0} & \\\\*".format(d['Committee']))
     else:
-        fh.write("{0}, {1}, {2} & & \\\\*".format(d['City'], d['State'], d['Zip']))
+        fh.write("{0}, {1}, {2} & {3} & \\\\*".format(d['City'], d['State'], d['Zip'], d['Committee']))
     fh.write("\hline\n")
 
 def main(argv, panel):
