@@ -1,6 +1,6 @@
 #!/bin/bash
 sheet_id="1nh93bN34gIsu7FiBfPDHNZmQVQa-mIbTAO5_QtDUJlM"
-email_id="962835773"
+email_id="659153823"
 main_id="474791396"
 panel_id="635467025"
 
