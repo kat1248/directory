@@ -6,7 +6,7 @@
 *.gz
 *.inc.tex
 *.tex
-*.txt
+emails.txt
 raw.csv
 main.csv
 emails.csv
