@@ -11,7 +11,7 @@ INCLUDES = $(patsubst %.pdf, %.inc.tex, $(OUTPUTS))
 DATE_STAMP = $(shell date +%Y-%m-%d)
 COPY_FILES = $(patsubst %.pdf, %-$(DATE_STAMP).pdf, $(OUTPUTS))
 
-PANELS = "\\newcommand\{\\panelA\}\{68 \}\\newcommand\{\\panelB\}\{69\}"
+PANELS = "\\newcommand\{\\panelA\}\{69 \}\\newcommand\{\\panelB\}\{70\}"
 NEXT_PANELS = "\\newcommand\{\\panelA\}\{69 \}\\newcommand\{\\panelB\}\{70\}"
 
 current.pdf : page.tex current.inc.tex
