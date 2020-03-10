@@ -81,6 +81,12 @@ def print_current(fh, d):
         fh.write("{0}, {1}, {2} & {3} & \\\\*".format(d['City'], d['State'], d['Zip'], d['Committee']))
     fh.write("\hline\n")
 
+def print_missing(fh, missing):
+    fh.write("\\begin{description}\n")
+    for m in missing:
+        fh.write("\\item[] {0} {1}, Area {2}, {3}, Panel {4}\n".format(m['First'], m['Last'], m['Area'], m['Area Name'], m['Panel']))
+    fh.write("\\end{description}\n")
+
 def main(argv, panel):
     valid_areas = ['11', '12', '13', '28', '29', '30', '31', '43', '44', '45', '47', '48', '49', '50', '59', '60', '61', '70']
     current_panels = [str(panel), str(panel + 1)]
@@ -91,7 +97,8 @@ def main(argv, panel):
     honorary = []
     current = []
     alternate = []
-
+    missing = []
+    
     with open('directory.inc.tex', 'w') as del_file:
         with open('main.csv') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -110,6 +117,9 @@ def main(argv, panel):
                             current.append(row)
                         elif row['Panel'] in current_alts:
                             alternate.append(row)
+                        if row['Street 1'] == 'Address Unknown' and row['Email'] == '':
+                            missing.append(row)
+                            
                     else:
                         dead.append(row)
                 else:
@@ -126,6 +136,9 @@ def main(argv, panel):
     with open('alternate.inc.tex', 'w') as alt_file:
         print_current_delegates(alt_file, alternate)
 
+    with open('missing.inc.tex', 'w') as missing_file:
+        print_missing(missing_file, missing)
+    
 if __name__ == "__main__":
     today = date.today()
     panel = today.year - 1950

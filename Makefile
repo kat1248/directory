@@ -6,7 +6,7 @@ FETCH := ./fetch_data.sh
 CP := cp
 SORT := csvsort
 
-OUTPUTS = directory.pdf current.pdf alternate.pdf
+OUTPUTS = directory.pdf current.pdf alternate.pdf missing.pdf
 INCLUDES = $(patsubst %.pdf, %.inc.tex, $(OUTPUTS))
 DATE_STAMP = $(shell date +%Y-%m-%d)
 COPY_FILES = $(patsubst %.pdf, %-$(DATE_STAMP).pdf, $(OUTPUTS))
@@ -19,6 +19,9 @@ current.pdf : page.tex current.inc.tex
 
 alternate.pdf : page.tex alternate.inc.tex
 	$(LATEX) -jobname alternate "\newcommand{\includedFile}{alternate.inc}\newcommand{\includedTitle}{Alternate Delegates}${PANELS}\input{$<}"
+
+missing.pdf : missing.tex missing.inc.tex
+	$(LATEX) -jobname missing "\newcommand{\includedFile}{missing.inc}\input{$<}"
 
 next.pdf : page.tex current.inc.tex
 	$(LATEX) -jobname next "\newcommand{\includedFile}{current.inc}\newcommand{\includedTitle}{Delegates}${NEXT_PANELS}\input{$<}"
