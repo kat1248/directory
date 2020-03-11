@@ -2,11 +2,7 @@
 *.log
 *.aux
 *.pdf
-*.fls
-*.fdb_latexmk
-*.gz
 *.inc.tex
 emails.txt
-raw.csv
 main.csv
 emails.csv
