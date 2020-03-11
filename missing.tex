@@ -1,0 +1,49 @@
+\documentclass[letterpaper,12pt]{report}
+
+\usepackage{longtable,tabu}
+\usepackage[margin=0.75in]{geometry} 
+\usepackage[singlelinecheck=false,font=large,textfont=bf,format=plain,labelformat=empty,justification=raggedright]{caption}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{xpatch}
+
+\makeatletter
+\xpatchcmd{\endmdframed}
+  {\aftergroup\endmdf@trivlist\color@endgroup}
+  {\endmdf@trivlist\color@endgroup\@doendpe}
+  {}{}
+\makeatother
+  
+\setlist{nosep}
+\setlist{noitemsep}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\textbf{WHERE ARE THEY NOW - \the\year}}
+
+\setlength\headsep{3pt}
+\setlength\headheight{18pt}
+
+\mdfdefinestyle{mystyle}{leftmargin=2cm, rightmargin=2cm, skipabove=\topskip}
+
+\title{\underline\bf{Where are they now - \the\year}}
+\author{}
+\date{Last Update: \today}
+
+\begin{document}
+\begin{mdframed}[style=mystyle]
+\begin{center}
+These are past Delegates whose mail has been returned to me indicating incorrect mailing address. If anyone has any information I would appreciate receiving an email with new information.
+
+Thank you
+
+Ken Taylor -- NERD Secretary -- NERDSecTreas@gmail.com
+\end{center}
+\end{mdframed}
+
+\input{\includedFile}
+
+\end{document}

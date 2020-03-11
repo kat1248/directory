@@ -6,7 +6,6 @@
 *.fdb_latexmk
 *.gz
 *.inc.tex
-*.tex
 emails.txt
 raw.csv
 main.csv
