@@ -3,7 +3,7 @@
 import os
 import csv, sys, getopt
 
-section_length = 45
+section_length = 48
 script_name = ''
 input_file = ''
 output_file = ''    
