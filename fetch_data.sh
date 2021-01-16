@@ -7,7 +7,8 @@ panel_id="635467025"
 fetch () {
     # fetch <sheet> <tab> <file> <escape>
     local tfile=$(mktemp /tmp/foo.XXXXXXXXX)
-    curl -s -o $tfile "https://docs.google.com/spreadsheets/d/$1/export" --data-urlencode "format=csv" --data-urlencode "id=$1" --data-urlencode "gid=$2"
+    #curl -s -o $tfile "https://docs.google.com/spreadsheets/d/$1/export" --data-urlencode "format=csv" --data-urlencode "id=$1" --data-urlencode "gid=$2"
+    curl -s -o $tfile "https://docs.google.com/a/google.com/spreadsheets/d/$1/gviz/tq?tqx=out:csv&sheet=Main"
     if [ "$4" = true ]; then
         # escape &, _, #
         sed -e '2,$s/\([&_#]\)/\\\1/g' $tfile > $3
