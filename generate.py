@@ -9,6 +9,7 @@ from datetime import time
 from datetime import datetime
 
 use_longtabu = True
+custom_delimiter = ';'
 
 def table_start(fh):
     fh.write("\\newpage\n")
@@ -101,7 +102,7 @@ def main(argv, panel):
     
     with open('directory.inc.tex', 'w') as del_file:
         with open('main.csv') as csvfile:
-            reader = csv.DictReader(csvfile)
+            reader = csv.DictReader(csvfile, delimiter=custom_delimiter)
             for row in reader:
                 if row['Area'] in valid_areas:
                     if row['Area'] != area:

@@ -5,6 +5,7 @@ PYTHON := python
 FETCH := ./fetch_data.sh
 CP := cp
 SORT := csvsort
+FORMAT := csvformat
 
 OUTPUTS = directory.pdf current.pdf alternate.pdf missing.pdf
 INCLUDES = $(patsubst %.pdf, %.inc.tex, $(OUTPUTS))
@@ -39,7 +40,7 @@ $(INCLUDES) : main.csv generate.py
 
 main.csv emails.csv : 
 	$(FETCH) del.csv emails.csv
-	$(SORT) -c Area,Panel del.csv > main.csv
+	$(SORT) -c Area,Panel del.csv | $(FORMAT) -D \; > main.csv
 	$(RM) del.csv
 
 emails.txt : emails.csv
